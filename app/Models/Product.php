@@ -8,6 +8,14 @@ use Illuminate\Database\Eloquent\Model;
 class Product extends Model
 {
     use HasFactory;
+    protected $fillable = [
+        'provider_id',
+        'name',
+        'description',
+        'price',
+        'stock',
+        'image',
+    ];
     public function serviceProvider() {
         return $this->belongsTo(ServiceProvider::class);
     }
