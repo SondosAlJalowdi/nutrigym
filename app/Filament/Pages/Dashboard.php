@@ -2,6 +2,7 @@
 
 namespace App\Filament\Pages;
 
+use App\Filament\Widgets\UserWidget;
 use Filament\Forms\Components\DatePicker;
 use Filament\Forms\Components\Section;
 use Filament\Forms\Components\TextInput;
@@ -13,6 +14,13 @@ class Dashboard extends \Filament\Pages\Dashboard
 {
     use HasFiltersForm;
 
+    
+    protected function getHeaderWidgets(): array
+    {
+        return [
+            UserWidget::class,
+        ];
+    }
     public function filtersForm(Form $form): Form
     {
         return $form->schema([

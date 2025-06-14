@@ -38,7 +38,7 @@ class UserChartWidget extends ChartWidget
 
         'datasets' => [
                 [
-                    'label' => 'Blog posts created',
+                    'label' => 'Total Users',
                     'data' => $data->map(fn (TrendValue $value) => $value->aggregate),
                 ],
             ],
