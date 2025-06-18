@@ -11,7 +11,7 @@ use Flowframe\Trend\TrendValue;
 
 class UserChartWidget extends ChartWidget
 {
-
+    protected static ?int $sort = 4;
     use InteractsWithPageFilters;
 
     protected static ?string $heading = 'User Chart';
@@ -51,4 +51,6 @@ class UserChartWidget extends ChartWidget
     {
         return 'line';
     }
+
+    
 }
