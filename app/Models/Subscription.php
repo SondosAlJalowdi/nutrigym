@@ -25,6 +25,6 @@ class Subscription extends Model
     }
 
     public function serviceProvider() {
-        return $this->belongsTo(ServiceProvider::class);
+        return $this->belongsTo(ServiceProvider::class, 'service_id');
     }
 }

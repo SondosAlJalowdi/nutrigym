@@ -2,22 +2,23 @@
 
 namespace App\Filament\Resources;
 
-use App\Filament\Resources\SubsciptionResource\Pages;
-use App\Filament\Resources\SubsciptionResource\RelationManagers;
-use App\Models\Subscription;
 use Filament\Forms;
-use Filament\Forms\Components\DateTimePicker;
+use Filament\Tables;
+use Filament\Forms\Form;
+use Filament\Tables\Table;
+use App\Models\Subscription;
+use App\Models\ServiceProvider;
+use Filament\Resources\Resource;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\Textarea;
-use Filament\Forms\Form;
-use Filament\Resources\Resource;
-use Filament\Tables;
 use Filament\Tables\Columns\TextColumn;
-use Filament\Tables\Table;
-use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\SoftDeletingScope;
-use Filament\Forms\Components\ToggleButtons;
 use Filament\Forms\Components\DatePicker;
+use Illuminate\Database\Eloquent\Builder;
+use Filament\Forms\Components\ToggleButtons;
+use Filament\Forms\Components\DateTimePicker;
+use Illuminate\Database\Eloquent\SoftDeletingScope;
+use App\Filament\Resources\SubsciptionResource\Pages;
+use App\Filament\Resources\SubsciptionResource\RelationManagers;
 
 class SubsciptionResource extends Resource
 {
@@ -36,7 +37,9 @@ class SubsciptionResource extends Resource
 
                 Select::make('service_id')
                     ->label('Service')
-                    ->relationship('serviceProvider', 'type')
+                    ->options(ServiceProvider::all()->pluck('type', 'id'))
+                    ->searchable()
+                    ->preload()
                     ->required(),
 
                 ToggleButtons::make('status')
@@ -76,12 +79,20 @@ class SubsciptionResource extends Resource
                     ->searchable()
                     ->sortable(),
 
-                TextColumn::make('serviceProvider.type')
+                TextColumn::make('service.title')
                     ->label('Service Provider')
                     ->searchable()
                     ->sortable(),
 
                 TextColumn::make('status')
+                    ->badge()
+                    ->color(function (string $state ): string {
+                        return match ($state){
+                            'active' => 'success',
+                            'pending' => 'warning',
+                            'expired' => 'danger',
+                        };
+                    })
                     ->label('Status')
                     ->sortable(),
 
@@ -102,7 +113,7 @@ class SubsciptionResource extends Resource
                 //
             ])
             ->actions([
-                Tables\Actions\EditAction::make(),
+                Tables\Actions\ViewAction::make(),
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([

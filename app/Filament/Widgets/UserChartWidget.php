@@ -11,7 +11,7 @@ use Flowframe\Trend\TrendValue;
 
 class UserChartWidget extends ChartWidget
 {
-
+    protected static ?int $sort = 4;
     use InteractsWithPageFilters;
 
     protected static ?string $heading = 'User Chart';
@@ -38,7 +38,7 @@ class UserChartWidget extends ChartWidget
 
         'datasets' => [
                 [
-                    'label' => 'Blog posts created',
+                    'label' => 'Total Users',
                     'data' => $data->map(fn (TrendValue $value) => $value->aggregate),
                 ],
             ],
@@ -51,4 +51,6 @@ class UserChartWidget extends ChartWidget
     {
         return 'line';
     }
+
+    
 }
