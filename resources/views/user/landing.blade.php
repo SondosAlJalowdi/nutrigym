@@ -27,6 +27,57 @@
     <link rel="stylesheet" href="{{ asset('gymlife-master/css/style.css') }}">
 
 </head>
+<style>
+    .section-box {
+        padding: 50px 20px;
+        border-radius: 20px;
+        box-shadow: 0 6px 20px rgba(0, 0, 0, 0.05);
+
+    }
+
+    .section-title {
+        color: #f36100;
+        font-weight: 700;
+        font-size: 42px;
+        margin-bottom: 15px;
+    }
+
+    .section-desc {
+        font-size: 18px;
+        color: #555;
+        margin-bottom: 25px;
+        line-height: 1.6;
+    }
+
+    .section-img {
+        width: 100%;
+        height: 350px;
+        object-fit: cover;
+        border-radius: 15px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+        transition: transform 0.3s ease;
+    }
+
+    .section-img:hover {
+        transform: scale(1.03);
+    }
+
+    .primary-btn {
+        padding: 12px 30px;
+        background-color: #f36100;
+        color: white;
+        border-radius: 25px;
+        text-transform: uppercase;
+        font-weight: 500;
+        text-decoration: none;
+        display: inline-block;
+        transition: background 0.3s;
+    }
+
+    .primary-btn:hover {
+        background-color: #d64d00;
+    }
+</style>
 
 <body>
 
@@ -181,58 +232,132 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-12">
-                    <div class="section-title">
-                        <span>Why chose us?</span>
-                        <h2>PUSH YOUR LIMITS FORWARD</h2>
+                    <div class="section-title text-center">
+                        <span>Why Choose Us?</span>
+                        <h2>Empowering Your Health Journey</h2>
                     </div>
                 </div>
             </div>
-            <div class="row">
+            <div class="row text-center">
                 <div class="col-lg-3 col-sm-6">
                     <div class="cs-item">
                         <span class="flaticon-034-stationary-bike"></span>
-                        <h4>Modern equipment</h4>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
-                            dolore facilisis.</p>
+                        <h4>Top-Tier Facilities</h4>
+                        <p>Access modern gyms and equipment designed to enhance your workouts and maximize your progress.</p>
                     </div>
                 </div>
                 <div class="col-lg-3 col-sm-6">
                     <div class="cs-item">
                         <span class="flaticon-033-juice"></span>
-                        <h4>Healthy nutrition plan</h4>
-                        <p>Quis ipsum suspendisse ultrices gravida. Risus commodo viverra maecenas accumsan lacus vel
-                            facilisis.</p>
+                        <h4>Personalized Nutrition</h4>
+                        <p>Connect with expert nutritionists who tailor meal plans to your lifestyle and health goals.</p>
                     </div>
                 </div>
                 <div class="col-lg-3 col-sm-6">
                     <div class="cs-item">
                         <span class="flaticon-002-dumbell"></span>
-                        <h4>Proffesponal training plan</h4>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
-                            dolore facilisis.</p>
+                        <h4>Certified Professionals</h4>
+                        <p>Work with licensed trainers and therapists to safely improve your strength, flexibility, and recovery.</p>
                     </div>
                 </div>
                 <div class="col-lg-3 col-sm-6">
                     <div class="cs-item">
                         <span class="flaticon-014-heart-beat"></span>
-                        <h4>Unique to your needs</h4>
-                        <p>Quis ipsum suspendisse ultrices gravida. Risus commodo viverra maecenas accumsan lacus vel
-                            facilisis.</p>
+                        <h4>Tailored Experience</h4>
+                        <p>From fitness to therapy to healthy food — everything is customized to support your personal journey.</p>
                     </div>
                 </div>
             </div>
         </div>
     </section>
+
     <!-- ChoseUs Section End -->
 
     <!-- Classes Section Begin -->
-    <section class="classes-section spad">
-        <div class="container">
-            <h1 style="text-align: center; color: #f36100; font-weight: 600; font-size: 50px; margin-bottom: 20px;">
-                Gym
-            </h1>
+
+<!-- Gyms (Image Left, Text Right) -->
+<section class="classes-section spad">
+    <div class="container section-box">
+        <div class="row align-items-center">
+            <div class="col-md-6 mb-4 mb-md-0">
+                <img src="{{ asset('gymlife-master/img/gallery/gyms.webp') }}" alt="Gyms" class="section-img">
+            </div>
+            <div class="col-md-6 text-md-start text-center">
+                <h2 class="section-title">Gyms</h2>
+                <p class="section-desc">
+                    Discover the best gyms near you and start your fitness journey today with expert coaches and modern equipment.
+                </p>
+                <a href="{{ route('categories', parameters: ['name' => 'gyms']) }}" class="primary-btn">See More</a>
+            </div>
         </div>
-    </section>
+    </div>
+</section>
+
+<!-- Physical Therapy (Image Right, Text Left) -->
+<section class="classes-section spad">
+    <div class="container section-box">
+        <div class="row align-items-center flex-md-row-reverse">
+            <div class="col-md-6 mb-4 mb-md-0">
+                <img src="{{ asset('gymlife-master/img/gallery/Physical-Therapy.jpg') }}" alt="Physical Therapy" class="section-img">
+            </div>
+            <div class="col-md-6 text-md-start text-center">
+                <h2 class="section-title">Physical Therapy Clinics</h2>
+                <p class="section-desc">
+                    Rehabilitate your body with our trusted therapists using proven treatment techniques in a calm environment.
+                </p>
+                <a href="{{ route('categories', parameters: ['name' => 'Therapy']) }}" class="primary-btn">See More</a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Nutrition (Center Layout) -->
+<section class="classes-section spad">
+    <div class="container section-box text-center">
+        <img src="{{ asset('gymlife-master/img/gallery/nutrition.jpg') }}" alt="Nutrition" class="section-img mb-4" style="max-width: ">
+        <h2 class="section-title">Nutrition Clinics</h2>
+        <p class="section-desc">
+            Personalized diet plans, healthy lifestyle guidance, and expert nutrition advice to support your fitness goals.
+        </p>
+        <a href="{{ route('categories', parameters: ['name' => 'Nutrition']) }}" class="primary-btn">See More</a>
+    </div>
+</section>
+
+<!-- Restaurants (Image Left, Text Right) -->
+<section class="classes-section spad">
+    <div class="container section-box">
+        <div class="row align-items-center">
+            <div class="col-md-6 mb-4 mb-md-0">
+                <img src="{{ asset('gymlife-master/img/gallery/resturant.webp') }}" alt="Restaurants" class="section-img">
+            </div>
+            <div class="col-md-6 text-md-start text-center">
+                <h2 class="section-title">Restaurants</h2>
+                <p class="section-desc">
+                    Explore healthy and delicious meal options in restaurants that understand fitness-focused diets.
+                </p>
+                <a href="{{ route('categories', parameters: ['name' => 'Restaurants']) }}" class="primary-btn">See More</a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Store (Image Right, Text Left) -->
+<section class="classes-section spad">
+    <div class="container section-box">
+        <div class="row align-items-center flex-md-row-reverse">
+            <div class="col-md-6 mb-4 mb-md-0">
+                <img src="{{ asset('gymlife-master/img/gallery/store.webp') }}" alt="Store" class="section-img">
+            </div>
+            <div class="col-md-6 text-md-start text-center">
+                <h2 class="section-title">Store</h2>
+                <p class="section-desc">
+                    Shop your favorite fitness gear, health supplements, and wellness products in our exclusive store.
+                </p>
+                <a href="{{ route('categories', parameters: ['name' => 'Store']) }}" class="primary-btn">See More</a>
+            </div>
+        </div>
+    </div>
+</section>
     <!-- ChoseUs Section End -->
 
     <!-- Banner Section Begin -->
@@ -251,79 +376,6 @@
     </section>
     <!-- Banner Section End -->
 
-    <!-- Pricing Section Begin -->
-    <section class="pricing-section spad">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12">
-                    <div class="section-title">
-                        <span>Our Plan</span>
-                        <h2>Choose your pricing plan</h2>
-                    </div>
-                </div>
-            </div>
-            <div class="row justify-content-center">
-                <div class="col-lg-4 col-md-8">
-                    <div class="ps-item">
-                        <h3>Class drop-in</h3>
-                        <div class="pi-price">
-                            <h2>$ 39.0</h2>
-                            <span>SINGLE CLASS</span>
-                        </div>
-                        <ul>
-                            <li>Free riding</li>
-                            <li>Unlimited equipments</li>
-                            <li>Personal trainer</li>
-                            <li>Weight losing classes</li>
-                            <li>Month to mouth</li>
-                            <li>No time restriction</li>
-                        </ul>
-                        <a href="#" class="primary-btn pricing-btn">Enroll now</a>
-                        <a href="#" class="thumb-icon"><i class="fa fa-picture-o"></i></a>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-8">
-                    <div class="ps-item">
-                        <h3>12 Month unlimited</h3>
-                        <div class="pi-price">
-                            <h2>$ 99.0</h2>
-                            <span>SINGLE CLASS</span>
-                        </div>
-                        <ul>
-                            <li>Free riding</li>
-                            <li>Unlimited equipments</li>
-                            <li>Personal trainer</li>
-                            <li>Weight losing classes</li>
-                            <li>Month to mouth</li>
-                            <li>No time restriction</li>
-                        </ul>
-                        <a href="#" class="primary-btn pricing-btn">Enroll now</a>
-                        <a href="#" class="thumb-icon"><i class="fa fa-picture-o"></i></a>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-8">
-                    <div class="ps-item">
-                        <h3>6 Month unlimited</h3>
-                        <div class="pi-price">
-                            <h2>$ 59.0</h2>
-                            <span>SINGLE CLASS</span>
-                        </div>
-                        <ul>
-                            <li>Free riding</li>
-                            <li>Unlimited equipments</li>
-                            <li>Personal trainer</li>
-                            <li>Weight losing classes</li>
-                            <li>Month to mouth</li>
-                            <li>No time restriction</li>
-                        </ul>
-                        <a href="#" class="primary-btn pricing-btn">Enroll now</a>
-                        <a href="#" class="thumb-icon"><i class="fa fa-picture-o"></i></a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-    <!-- Pricing Section End -->
 
     <!-- Gallery Section Begin -->
     <div class="gallery-section">
@@ -359,75 +411,6 @@
     </div>
     <!-- Gallery Section End -->
 
-    <!-- Team Section Begin -->
-    <section class="team-section spad">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12">
-                    <div class="team-title">
-                        <div class="section-title">
-                            <span>Our Team</span>
-                            <h2>TRAIN WITH EXPERTS</h2>
-                        </div>
-                        <a href="#" class="primary-btn btn-normal appoinment-btn">appointment</a>
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="ts-slider owl-carousel">
-                    <div class="col-lg-4">
-                        <div class="ts-item set-bg" data-setbg="{{ asset('gymlife-master/img/team/team-1.jpg') }} ">
-                            <div class="ts_text">
-                                <h4>Athart Rachel</h4>
-                                <span>Gym Trainer</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-4">
-                        <div class="ts-item set-bg" data-setbg="{{ asset('gymlife-master/img/team/team-2.jpg') }}">
-                            <div class="ts_text">
-                                <h4>Athart Rachel</h4>
-                                <span>Gym Trainer</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-4">
-                        <div class="ts-item set-bg" data-setbg="{{ asset('gymlife-master/img/team/team-3.jpg') }}">
-                            <div class="ts_text">
-                                <h4>Athart Rachel</h4>
-                                <span>Gym Trainer</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-4">
-                        <div class="ts-item set-bg" data-setbg="{{ asset('gymlife-master/img/team/team-4.jpg') }}">
-                            <div class="ts_text">
-                                <h4>Athart Rachel</h4>
-                                <span>Gym Trainer</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-4">
-                        <div class="ts-item set-bg" data-setbg="{{ asset('gymlife-master/img/team/team-5.jpg') }}">
-                            <div class="ts_text">
-                                <h4>Athart Rachel</h4>
-                                <span>Gym Trainer</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-4">
-                        <div class="ts-item set-bg" data-setbg="{{ asset('gymlife-master/img/team/team-6.jpg') }}">
-                            <div class="ts_text">
-                                <h4>Athart Rachel</h4>
-                                <span>Gym Trainer</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-    <!-- Team Section End -->
 
     <!-- Get In Touch Section Begin -->
     <div class="gettouch-section">

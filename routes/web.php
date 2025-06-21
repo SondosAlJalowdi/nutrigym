@@ -4,6 +4,7 @@ use App\Http\Controllers\UserPagesController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthManager;
 use App\Http\Controllers\SocialAuthController;
+use App\Http\Controllers\CategoryViewController;
 
 /*
 |--------------------------------------------------------------------------
@@ -27,6 +28,7 @@ Route::get('/logout', [AuthManager::class, 'logout'])->name('logout');
 Route::get('auth/redirect/{provider}', [SocialAuthController::class, 'redirect'])->name('auth.redirect');
 Route::get('auth/callback/{provider}', [SocialAuthController::class, 'callback'])->name('auth.callback');
 
+Route::get('/categories/{name}', [CategoryViewController::class, 'showByCategory'])->name('categories');
 
 
 
