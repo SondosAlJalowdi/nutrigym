@@ -1,8 +1,8 @@
 @extends('user.generalLayout')
 @section('content')
 
-<div class="container d-flex justify-content-center align-items-center" style="height: 90vh">
-    <div class="card shadow-lg p-4 w-100" style="max-width: 400px; margin-top: 90px;">
+<div class="container d-flex justify-content-center align-items-center" style="height: 100vh">
+    <div class="card shadow-lg p-4 w-100" style="max-width: 400px; margin-top: 150px;">
         <h3 class="text-center mb-4">Login</h3>
         <div class="mt-5">
             @if ($errors->any())

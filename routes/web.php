@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthManager;
 use App\Http\Controllers\SocialAuthController;
 use App\Http\Controllers\CategoryViewController;
+use App\Http\Controllers\GymsController;
 
 /*
 |--------------------------------------------------------------------------
@@ -31,12 +32,16 @@ Route::get('auth/callback/{provider}', [SocialAuthController::class, 'callback']
 Route::get('/categories/{name}', [CategoryViewController::class, 'showByCategory'])->name('categories');
 
 
-
+Route::get('/gyms', [GymsController::class, 'index'])->name('gyms.index');
+Route::get('/gyms/{id}', [GymsController::class, 'show'])->name('gyms.show');
 
 Route::middleware(['auth', 'role:user'])->group(function () {
     Route::get('/profile/complete', [UserPagesController::class, 'showCompleteProfileForm'])->name('user.completeProfile');
     Route::post('/profile/complete', [UserPagesController::class, 'completeProfile'])->name('profile.complete.post');
     Route::get('/profile', [UserPagesController::class, 'showProfile'])->name('user.profile');
+    Route::post('/subscriptions', [GymsController::class, 'addSubscription'])->name('subscriptions.store');
+    Route::get('/subscriptions', [GymsController::class, 'mySubscriptions'])->name('subscriptions.show');
+
 });
 
 

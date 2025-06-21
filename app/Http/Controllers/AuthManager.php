@@ -57,10 +57,10 @@ class AuthManager extends Controller
             'name' => $request->name,
             'email' => $request->email,
             'password' => Hash::make($request->password),
+            'role' => 'user',
         ]);
 
         // Assign default role (user)
-        $user->roles()->attach(Role::where('name', 'user')->first()->id);
 
         Auth::login($user);
 

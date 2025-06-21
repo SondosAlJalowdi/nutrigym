@@ -54,11 +54,9 @@ class SocialAuthController extends Controller
             $user = User::create([
                 'email' => $email,
                 'name' => $socialUser->getName() ?? $socialUser->getNickname(),
-                'password' => bcrypt(uniqid()), // dummy password
+                'password' => bcrypt(uniqid()),
+                'role' => 'user',
             ]);
-
-            // Attach default 'user' role
-            $user->roles()->attach(Role::where('name', 'user')->first()->id);
 
             Auth::login($user);
 

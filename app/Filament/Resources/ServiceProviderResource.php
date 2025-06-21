@@ -25,19 +25,21 @@ class ServiceProviderResource extends Resource
     protected static ?string $navigationIcon = 'heroicon-o-clipboard-document-check';
 
     public static function form(Form $form): Form
-    {
-        return $form
-            ->schema([
-                Select::make('user_id')
-                    ->label('User')
-                    ->relationship('user', 'name')
-                    ->required(),
-                    TextInput::make('type')->required(),
-                    TextInput::make('about')->required(),
+{
+    return $form->schema([
+        Select::make('user_id')
+            ->label('Service Provider')
+            ->options(function () {
+                return User::where('role', 'service provider')
+                    ->pluck('name', 'id');
+            })
+            ->searchable()
+            ->required(),
 
-
-            ]);
-    }
+        TextInput::make('type')->required(),
+        TextInput::make('about')->required(),
+    ]);
+}
 
     public static function table(Table $table): Table
     {

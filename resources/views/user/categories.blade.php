@@ -1,7 +1,7 @@
 @extends('user.generalLayout')
 @section('content')
 <div class="container py-5">
-    <h2 class="text-center mb-4 text-uppercase text-primary">{{ $category->name }}</h2>
+    <h2 class="text-center mb-4 text-uppercase text-primary" style="margin-top: 120px ">{{ $category->name }}</h2>
 
     @if($services->isEmpty())
         <p class="text-center">No services available in this category yet.</p>
@@ -11,7 +11,7 @@
                 <div class="col-md-4 mb-4">
                     <div class="card h-100 shadow-sm">
                         @if($service->image)
-                            <img src="{{ asset('storage/' . $service->image) }}" class="card-img-top" alt="{{ $service->title }}" style="height: 200px; object-fit: cover;">
+                            <img src="{{ asset('storage/services' . $service->image) }}" class="card-img-top" alt="{{ $service->title }}" style="height: 200px; object-fit: cover;">
                         @endif
                         <div class="card-body">
                             <h5 class="card-title">{{ $service->title }}</h5>

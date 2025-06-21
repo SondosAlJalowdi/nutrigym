@@ -21,9 +21,10 @@ class ServiceProvider extends Model
         return $this->belongsTo(Category::class);
     }
 
-    public function services() {
-        return $this->hasMany(Service::class);
-    }
+    public function services()
+{
+    return $this->hasMany(Service::class, 'provider_id');
+}
 
     public function products() {
         return $this->hasMany(Product::class);
