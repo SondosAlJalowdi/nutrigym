@@ -35,6 +35,11 @@ class UserResource extends Resource
                 TextInput::make('phone')->tel()->placeholder('07xxxxxxxx'),
                 FileUpload::make('image')->image()->directory('uploads'),
                 TextInput::make('age'),
+                Select::make('role')->options([
+                    'admin' => 'Admin',
+                    'user' => 'User',
+                    'service provider' => 'Service Provider',
+                ])->default('user'),
                 Select::make('gender')->options([
                     'male'=>'Male',
                     'female'=>'Female',

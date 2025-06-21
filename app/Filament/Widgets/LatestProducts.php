@@ -5,13 +5,17 @@ namespace App\Filament\Widgets;
 use App\Models\Product;
 use Filament\Tables;
 use Filament\Tables\Columns\TextColumn;
+use Filament\Tables\Columns\IconColumn;
 use Filament\Tables\Table;
+use Filament\Widgets\Concerns\InteractsWithPageFilters;
+use Filament\Widgets\Widget;
 use Filament\Widgets\TableWidget as BaseWidget;
 
 class LatestProducts extends BaseWidget
 {
     protected static ?int $sort = 5;
     protected int | string | array $columnSpan = 'full';
+    use InteractsWithPageFilters;
     public function table(Table $table): Table
     {
         return $table
@@ -33,6 +37,7 @@ class LatestProducts extends BaseWidget
                     ->label('Created At')
                     ->dateTime()
                     ->sortable(),
+                
             ]);
     }
 }

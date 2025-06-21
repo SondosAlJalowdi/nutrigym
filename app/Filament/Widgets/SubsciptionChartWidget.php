@@ -31,6 +31,9 @@ class SubsciptionChartWidget extends ChartWidget
                 [
                     'label' => 'Total Subscriptions',
                     'data' => $data->map(fn (TrendValue $value) => $value->aggregate),
+                    'descriptionIcon' => 'heroicon-m-currency-dollar',
+                    'descriptionColor' => 'success',
+                    'color' => 'success', 
 
 
 

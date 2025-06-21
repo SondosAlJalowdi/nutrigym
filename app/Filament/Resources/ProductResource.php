@@ -39,7 +39,8 @@ class ProductResource extends Resource
                     ->directory('uploads'),
                     Select::make('provider_id')
                     ->label('Service Provider')
-                    ->relationship('serviceProvider', 'type'),
+                    ->options(
+                        ServiceProvider::all()->pluck('type', 'id')),
                     
             ]);
     }

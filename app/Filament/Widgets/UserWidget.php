@@ -31,15 +31,15 @@ class UserWidget extends BaseWidget
                     ->chart([1,5,7,2,9,5,10,9]),
             Stat::make('Appointments', Appointment::count())
                 ->description('Total number of appointments made')
-                ->color('success')
+                ->color('info')
                 ->descriptionIcon('heroicon-m-arrow-trending-up', IconPosition::Before) 
-                ->descriptionColor('success')
+                ->descriptionColor('info')
                 ->chart([2,3,5,1,4,6,8,3]),
             Stat::make('Subsceiption', Subscription::count())
                 ->description('Total number of users with subscriptions')
-                ->color('danger')
-                ->descriptionColor('danger')
-                ->descriptionIcon('heroicon-m-arrow-trending-down', IconPosition::Before)
+                ->color('success')
+                ->descriptionColor('success')
+                ->descriptionIcon('heroicon-m-currency-dollar', IconPosition::Before)
                 ->chart([3,2,4,1,5,6,2,8]),
 
 

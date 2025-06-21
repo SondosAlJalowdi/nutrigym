@@ -29,8 +29,12 @@ class ServiceProviderResource extends Resource
         return $form
             ->schema([
                 Select::make('user_id')
-                    ->label('User')
-                    ->relationship('user', 'name')
+                    ->label('Service Provider')
+                    ->options(function (){
+                        return User::where('role', 'service provider')
+                            ->pluck('name', 'id');
+                    })
+                    
                     ->required(),
                     TextInput::make('type')->required(),
                     TextInput::make('about')->required(),
@@ -55,6 +59,7 @@ class ServiceProviderResource extends Resource
             ->actions([
                 Tables\Actions\EditAction::make(),
                 Tables\Actions\ViewAction::make(),
+                
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
