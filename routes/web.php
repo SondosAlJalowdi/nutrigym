@@ -41,6 +41,10 @@ Route::middleware(['auth', 'role:user'])->group(function () {
     Route::get('/profile', [UserPagesController::class, 'showProfile'])->name('user.profile');
     Route::post('/subscriptions', [GymsController::class, 'addSubscription'])->name('subscriptions.store');
     Route::get('/subscriptions', [GymsController::class, 'mySubscriptions'])->name('subscriptions.show');
+    Route::post('/appointments', [CategoryViewController::class, 'addAppointment'])->name('appointments.store');
+    Route::get('/my-appointments', [CategoryViewController::class, 'myAppointments'])->name('appointments.show');
+
+
 
 });
 

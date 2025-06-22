@@ -10,6 +10,9 @@ use Illuminate\Notifications\Notifiable;
 use Filament\Models\Contracts\FilamentUser;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+/**
+ * @property \Illuminate\Database\Eloquent\Collection|\App\Models\Subscription[] $subscriptions
+ */
 
 class User extends Authenticatable implements FilamentUser
 {

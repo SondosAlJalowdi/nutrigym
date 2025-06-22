@@ -88,10 +88,10 @@
                                         href="{{ route('login') }}">Login</a></li>
                             @endguest
                             @auth
-                                <li><a href="{{route('subscriptions.show')}}">My Subscriptions</a></li>
-                                <li><a href="#">My Appointments</a></li>
+                                <li class="{{ request()->routeIs('subscriptions.show') ? 'active' : '' }}"><a href="{{route('subscriptions.show')}}">My Subscriptions</a></li>
+                                <li class="{{ request()->routeIs('appointments.show') ? 'active' : '' }}"><a href="{{route('appointments.show')}}">My Appointments</a></li>
                                 <li class="nav-item">
-                                    <a class="nav-link {{ request()->routeIs('user.profile') ? 'active-link' : '' }}"
+                                    <a class="nav-link {{ request()->routeIs('user.profile') ? 'active' : '' }}"
                                         href="{{ route('user.profile') }}">
                                         <i class="fa-solid fa-user mr-1"></i>
                                         {{ explode(' ', auth()->user()->name)[0] }}
@@ -103,9 +103,7 @@
                                     </a>
                                 </li>
                             @endauth
-                                <li>
-                                    <i class="fa fa-bell text-white"></i>
-                                </li>
+
                         </ul>
                     </nav>
                 </div>

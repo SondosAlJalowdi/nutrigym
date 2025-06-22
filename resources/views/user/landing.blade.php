@@ -95,7 +95,7 @@
             <ul>
                 <li><a href="./index.html">Home</a></li>
                 <li><a href="./about-us.html">About Us</a></li>
-                <li><a href="{{route('subscriptions.show')}}">My Subscriptions</a></li>
+                <li class="{{ request()->routeIs('subscriptions.show') ? 'active' : '' }}"><a href="{{route('subscriptions.show')}}">My Subscriptions</a></li>
                 <li><a href="#">My Appointments</a></li>
                 <li><a href="./team.html">Our Team</a></li>
                 <li><a href="./contact.html">Contact</a></li>
@@ -132,10 +132,10 @@
                                         href="{{ route('login') }}">Login</a></li>
                             @endguest
                             @auth
-                            <li><a href="{{route('subscriptions.show')}}">My Subscriptions</a></li>
-                                <li><a href="#">My Appointments</a></li>
+                            <li class="{{ request()->routeIs('subscriptions.show') ? 'active' : '' }}"><a href="{{route('subscriptions.show')}}">My Subscriptions</a></li>
+                            <li class="{{ request()->routeIs('appointments.show') ? 'active' : '' }}"><a href="{{route('appointments.show')}}">My Appointments</a></li>
                                 <li class="nav-item">
-                                    <a class="nav-link {{ request()->routeIs('user.profile') ? 'active-link' : '' }}"
+                                    <a class="nav-link {{ request()->routeIs('user.profile') ? 'active' : '' }}"
                                         href="{{ route('user.profile') }}">
                                         <i class="fa-solid fa-user mr-1"></i>
                                         {{ explode(' ', auth()->user()->name)[0] }}
@@ -150,13 +150,7 @@
                         </ul>
                     </nav>
                 </div>
-                <div class="col-lg-3">
-                    <div class="top-option">
-                        <div class="to-search search-switch">
-                            <i class="fa fa-bell"></i>
-                        </div>
-                    </div>
-                </div>
+
             </div>
             <div class="canvas-open">
                 <i class="fa fa-bars"></i>
@@ -284,7 +278,7 @@
                         Rehabilitate your body with our trusted therapists using proven treatment techniques in a calm
                         environment.
                     </p>
-                    <a href="{{ route('categories', parameters: ['name' => 'Therapy']) }}" class="primary-btn">See
+                    <a href="{{ url('/categories/' . str_replace(' ', '-', "Physical Therapy Clinics"))  }}" class="primary-btn">See
                         More</a>
                 </div>
             </div>
@@ -301,7 +295,7 @@
                 Personalized diet plans, healthy lifestyle guidance, and expert nutrition advice to support your fitness
                 goals.
             </p>
-            <a href="{{ route('categories', parameters: ['name' => 'Nutrition']) }}" class="primary-btn">See More</a>
+            <a href="{{ url('/categories/' . str_replace(' ', '-', "Nutrition Clinics"))  }}" class="primary-btn">See More</a>
         </div>
     </section>
 

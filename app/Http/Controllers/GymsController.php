@@ -12,6 +12,10 @@ use Illuminate\Support\Facades\Auth;
 use App\Models\Service;
 use Carbon\Carbon;
 
+/**
+ * @property \Illuminate\Database\Eloquent\Collection|\App\Models\Subscription[] $subscriptions
+ */
+
 class GymsController extends Controller
 {
     public function index(Request $request)
@@ -47,30 +51,40 @@ class GymsController extends Controller
     }
 
 
+
     public function addSubscription(Request $request)
-{
-    $request->validate([
-        'service_id' => 'required|exists:services,id',
-    ]);
+    {
+        $request->validate([
+            'service_id' => 'required|exists:services,id',
+            'start_date' => 'required|date|after_or_equal:today',
+        ]);
 
-    $service = Service::findOrFail($request->service_id);
+        $service = Service::findOrFail($request->service_id);
 
-    $subscription = auth()->user()->subscriptions()->create([
-        'service_id' => $service->id,
-        'status' => 'active',
-        'start_date' => Carbon::now(),
-        'end_date' => Carbon::now()->addDays($service->duration_in_days),
-        'details' => 'Auto-created based on selected plan.',
-    ]);
+        $startDate = Carbon::parse($request->start_date);
+        $endDate = $startDate->copy()->addDays($service->duration_in_days);
 
-    return redirect()->route('subscriptions.show')
-    ->with('success', 'Enrollment successful. Check your subscription details below.');
-}
+        /** @var \App\Models\User $user */
+        $user = auth()->user();
+        $user->subscriptions()->create([
+            'service_id' => $service->id,
+            'status' => 'active',
+            'start_date' => $startDate,
+            'end_date' => $endDate,
+            'details' => 'Auto-created based on selected plan.',
+        ]);
 
-public function mySubscriptions()
-{
-    $subscriptions = auth()->user()->subscriptions()->with('service')->latest()->get();
+        return redirect()->route('subscriptions.show')
+            ->with('success', 'Enrollment successful. Check your subscription details below.');
+    }
 
-    return view('user.gyms.subscriptions', compact('subscriptions'));
-}
+
+    public function mySubscriptions()
+    {
+        /** @var \App\Models\User $user */
+        $user = auth()->user();
+        $subscriptions = $user->subscriptions()->with('service')->latest()->get();
+
+        return view('user.gyms.subscriptions', compact('subscriptions'));
+    }
 }
