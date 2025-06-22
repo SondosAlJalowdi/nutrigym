@@ -90,8 +90,8 @@
                             @auth
                                 <li class="{{ request()->routeIs('subscriptions.show') ? 'active' : '' }}"><a href="{{route('subscriptions.show')}}">My Subscriptions</a></li>
                                 <li class="{{ request()->routeIs('appointments.show') ? 'active' : '' }}"><a href="{{route('appointments.show')}}">My Appointments</a></li>
-                                <li class="nav-item">
-                                    <a class="nav-link {{ request()->routeIs('user.profile') ? 'active' : '' }}"
+                                <li class="nav-item {{ request()->routeIs('user.profile') ? 'active' : '' }}">
+                                    <a class="nav-link "
                                         href="{{ route('user.profile') }}">
                                         <i class="fa-solid fa-user mr-1"></i>
                                         {{ explode(' ', auth()->user()->name)[0] }}

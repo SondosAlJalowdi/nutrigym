@@ -38,8 +38,9 @@ class ServiceProvider extends Model
         return $this->hasMany(Appointment::class);
     }
 
-    public function reviews() {
-        return $this->hasMany(Review::class);
+    public function reviews()
+    {
+        return $this->hasMany(Review::class, 'provider_id'); // not service_provider_id
     }
 
 }

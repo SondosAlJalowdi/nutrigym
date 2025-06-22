@@ -4,19 +4,27 @@
         <h2 class="text-center mb-4 text-uppercase text-white" style="margin-top: 120px ">{{ $category->name }}</h2>
 
         <!-- Search Form -->
-        <form method="GET" class="row mb-5">
-            <div class="col-md-5">
-                <input type="text" name="search" class="form-control" placeholder="Search by service name"
-                    value="{{ request('search') }}">
-            </div>
-            <div class="col-md-5">
-                <input type="text" name="location" class="form-control" placeholder="Search by location"
-                    value="{{ request('location') }}">
-            </div>
-            <div class="col-md-2">
-                <button type="submit" class="btn btn-primary w-100">Search</button>
+        <form method="GET" class="mb-4 p-3 rounded shadow-sm"
+            style="border: 1px solid #f36100; background-color: rgba(0, 0, 0, 0.1);">
+            <div class="row align-items-end">
+                <div class="col-md-9">
+                    <input type="text" class="form-control border-0" name="search" id="search"
+                        placeholder="Search by service name or location" value="{{ request('search') }}"
+                        style="background-color: #000000; color: white;">
+                </div>
+                <div class="col-md-3 d-flex align-items-end gap-2">
+                    <button type="submit" class="btn text-white w-100 mr-2"
+                        style="background-color: #f36100; border: 2px solid #ffffff;">
+                        <i class="fa-solid fa-search mr-2"></i> Search
+                    </button>
+                    <a href="{{ url()->current() }}" class="btn w-100"
+                        style="border: 2px solid #f36100; color: #f36100; background-color: white;">
+                        <i class="fa-solid fa-rotate-right mr-2"></i> Reset
+                    </a>
+                </div>
             </div>
         </form>
+
 
         @if ($services->isEmpty())
             <p class="text-center">No services available in this category yet.</p>
@@ -53,8 +61,22 @@
                                 <p class="font-weight-bold" style="color: #f36100 ">Price:
                                     {{ number_format($service->price, 2) }}JD</p>
                                 <!-- Book Button -->
-                                <button class="btn btn-outline-primary mt-2" data-toggle="modal"
-                                    data-target="#bookModal{{ $service->id }}">Book Appointment</button>
+                                <div class="d-flex justify-content-between mt-3">
+                                    <!-- Book Button -->
+                                    <a class="btn text-white mr-2 flex-fill"
+                                        style="background-color: #f36100; border: 2px solid #f36100;" data-toggle="modal"
+                                        data-target="#bookModal{{ $service->id }}">
+                                        Book Appointment
+                                    </a>
+
+                                    <!-- See Details Button -->
+                                    <a class="btn  flex-fill"
+                                    href="{{ route('provider.details', $service->serviceProvider->id) }}"
+                                        style="border: 2px solid #f36100; background-color: transparent; color: #f36100;">
+                                        See Details
+                                    </a>
+                                </div>
+
                             </div>
                         </div>
                     </div>
@@ -99,7 +121,8 @@
                                         </div>
                                     </div>
                                     <div class="modal-footer">
-                                        <button type="submit" class="btn btn-primary">Confirm Booking</button>
+                                        <button type="submit" class="btn text-white mr-2 flex-fill"
+                                        style="background-color: #f36100; border: 2px solid #f36100;">Confirm Booking</button>
                                     </div>
                                 </div>
                             </form>
@@ -109,14 +132,49 @@
             </div>
         @endif
     </div>
+
+    @if ($services->hasPages())
+        <div class="mt-4 d-flex justify-content-center mb-2">
+            <nav>
+                <ul class="pagination pagination-md custom-pagination">
+
+                    {{-- Previous Page Link --}}
+                    @if ($services->onFirstPage())
+                        <li class="page-item disabled"><span class="page-link">&laquo;</span></li>
+                    @else
+                        <li class="page-item">
+                            <a class="page-link" href="{{ $services->previousPageUrl() }}">&laquo;</a>
+                        </li>
+                    @endif
+
+                    {{-- Pagination Elements --}}
+                    @foreach ($services->getUrlRange(1, $services->lastPage()) as $page => $url)
+                        <li class="page-item {{ $services->currentPage() == $page ? 'active' : '' }}">
+                            <a class="page-link" href="{{ $url }}">{{ $page }}</a>
+                        </li>
+                    @endforeach
+
+                    {{-- Next Page Link --}}
+                    @if ($services->hasMorePages())
+                        <li class="page-item">
+                            <a class="page-link" href="{{ $services->nextPageUrl() }}">&raquo;</a>
+                        </li>
+                    @else
+                        <li class="page-item disabled"><span class="page-link">&raquo;</span></li>
+                    @endif
+
+                </ul>
+            </nav>
+        </div>
+    @endif
 @endsection
 
 <script>
-    document.addEventListener('DOMContentLoaded', function () {
+    document.addEventListener('DOMContentLoaded', function() {
         const bookedSlots = @json($bookedSlots);
 
         document.querySelectorAll('.appointment-date').forEach(dateInput => {
-            dateInput.addEventListener('change', function () {
+            dateInput.addEventListener('change', function() {
                 const selectedDate = this.value;
                 const serviceId = this.getAttribute('data-service-id');
                 const timeSelect = document.getElementById('time-select-' + serviceId);
@@ -155,7 +213,7 @@
 
         // Auto-select today and trigger change when modal opens
         document.querySelectorAll('[id^="bookModal"]').forEach(modal => {
-            modal.addEventListener('shown.bs.modal', function () {
+            modal.addEventListener('shown.bs.modal', function() {
                 const dateInput = modal.querySelector('.appointment-date');
                 if (dateInput) {
                     dateInput.value = new Date().toISOString().split('T')[0];
@@ -166,3 +224,35 @@
     });
 </script>
 
+<style>
+    .custom-pagination .page-link {
+        color: #f36100;
+        /* default text color (black) */
+        background-color: rgb(43, 43, 43);
+        border: 1px solid #f36100;
+        /* orange border */
+    }
+
+    .custom-pagination .page-link:hover {
+        background-color: #f36100;
+        /* orange on hover */
+        color: #fff;
+        border-color: #f36100;
+
+    }
+
+    .custom-pagination .page-item.active .page-link {
+        background-color: #f36100;
+        /* active page - orange */
+        border-color: #f36100;
+        color: #fff;
+        font-weight: bold;
+
+    }
+
+    .custom-pagination .page-item.disabled .page-link {
+        background-color: rgb(43, 43, 43);
+        color: #ffa467;
+        border: 1px solid #f36100;
+    }
+</style>

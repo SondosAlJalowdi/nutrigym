@@ -6,6 +6,7 @@ use App\Http\Controllers\AuthManager;
 use App\Http\Controllers\SocialAuthController;
 use App\Http\Controllers\CategoryViewController;
 use App\Http\Controllers\GymsController;
+use App\Http\Controllers\ReviewController;
 
 /*
 |--------------------------------------------------------------------------
@@ -30,7 +31,7 @@ Route::get('auth/redirect/{provider}', [SocialAuthController::class, 'redirect']
 Route::get('auth/callback/{provider}', [SocialAuthController::class, 'callback'])->name('auth.callback');
 
 Route::get('/categories/{name}', [CategoryViewController::class, 'showByCategory'])->name('categories');
-
+Route::get('/provider/{id}', [CategoryViewController::class, 'showDetails'])->name('provider.details');
 
 Route::get('/gyms', [GymsController::class, 'index'])->name('gyms.index');
 Route::get('/gyms/{id}', [GymsController::class, 'show'])->name('gyms.show');
@@ -43,16 +44,12 @@ Route::middleware(['auth', 'role:user'])->group(function () {
     Route::get('/subscriptions', [GymsController::class, 'mySubscriptions'])->name('subscriptions.show');
     Route::post('/appointments', [CategoryViewController::class, 'addAppointment'])->name('appointments.store');
     Route::get('/my-appointments', [CategoryViewController::class, 'myAppointments'])->name('appointments.show');
-
-
-
-});
-
-
-Route::middleware(['auth', 'role:admin'])->group(function () {
+    Route::post('/reviews', [ReviewController::class, 'store'])->middleware('auth')->name('reviews.store');
+    Route::delete('/reviews/{review}', [ReviewController::class, 'destroy'])->name('reviews.destroy')->middleware('auth');
 
 });
 
-Route::middleware(['auth', 'role:service_provider'])->group(function () {
 
-});
+Route::middleware(['auth', 'role:admin'])->group(function () {});
+
+Route::middleware(['auth', 'role:service_provider'])->group(function () {});

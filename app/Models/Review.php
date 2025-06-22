@@ -20,8 +20,9 @@ class Review extends Model
         return $this->belongsTo(User::class);
     }
 
-    public function serviceProvider() {
-        return $this->belongsTo(ServiceProvider::class);
+    public function provider()
+    {
+        return $this->belongsTo(ServiceProvider::class, 'provider_id');
     }
 
 }

@@ -6,7 +6,7 @@ use App\Models\Category;
 use App\Models\Appointment;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
-
+use App\Models\ServiceProvider;
 class CategoryViewController extends Controller
 {
     public function showByCategory(Request $request, $name)
@@ -16,20 +16,27 @@ class CategoryViewController extends Controller
 
         $servicesQuery = $category->services()->with('serviceProvider.user');
 
-        // Apply search filters
         if ($request->filled('search')) {
-            $servicesQuery->where('title', 'like', '%' . $request->search . '%');
+            $servicesQuery->whereHas('serviceProvider.user', function ($query) use ($request) {
+                $query->where('name', 'like', '%' . $request->search . '%')
+                    ->orWhere('location', 'like', '%' . $request->search . '%');
+            });
         }
 
-        if ($request->filled('location')) {
-            $servicesQuery->where('location', 'like', '%' . $request->location . '%');
-        }
 
-        $services = $servicesQuery->get();
+        $services = $servicesQuery->paginate(6)->withQueryString(); // Paginate and preserve search/location
+
 
         return view('user.categories', compact('category', 'services'));
     }
 
+
+    public function showDetails($id)
+    {
+        $provider = ServiceProvider::with(['user', 'services', 'reviews.user'])->findOrFail($id);
+
+    return view('user.providerDetails', compact('provider'));
+    }
 
 
     public function addAppointment(Request $request)
