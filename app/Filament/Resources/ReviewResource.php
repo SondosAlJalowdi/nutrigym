@@ -63,7 +63,11 @@ class ReviewResource extends Resource
                 TextColumn::make('serviceProvider.type')
                     ->label('Service Provider')
                     ->searchable()
-                    ->sortable(),
+                    ->sortable(function (Builder $query, string $direction): Builder {
+                    return $query->join('service_providers', 'reviews.provider_id', '=', 'service_providers.id')
+                    ->orderBy('service_providers.type', $direction)
+                    ->select('reviews.*');
+    }),
                 TextColumn::make('stars')
                     ->label('Stars')
                     ->sortable()

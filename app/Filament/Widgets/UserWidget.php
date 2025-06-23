@@ -35,7 +35,7 @@ class UserWidget extends BaseWidget
                 ->descriptionIcon('heroicon-m-arrow-trending-up', IconPosition::Before) 
                 ->descriptionColor('info')
                 ->chart([2,3,5,1,4,6,8,3]),
-            Stat::make('Subsceiption', Subscription::count())
+            Stat::make('Subscription', Subscription::count())
                 ->description('Total number of users with subscriptions')
                 ->color('success')
                 ->descriptionColor('success')
