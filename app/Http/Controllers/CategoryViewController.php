@@ -10,25 +10,35 @@ use App\Models\ServiceProvider;
 class CategoryViewController extends Controller
 {
     public function showByCategory(Request $request, $name)
-    {
-        $name = str_replace('-', ' ', $name);
-        $category = Category::where('name', $name)->firstOrFail();
+{
+    $name = str_replace('-', ' ', $name);
+    $category = Category::where('name', $name)->firstOrFail();
 
-        $servicesQuery = $category->services()->with('serviceProvider.user');
+    $servicesQuery = $category->services()->with('serviceProvider.user');
 
-        if ($request->filled('search')) {
-            $servicesQuery->whereHas('serviceProvider.user', function ($query) use ($request) {
-                $query->where('name', 'like', '%' . $request->search . '%')
-                    ->orWhere('location', 'like', '%' . $request->search . '%');
-            });
-        }
-
-
-        $services = $servicesQuery->paginate(6)->withQueryString(); // Paginate and preserve search/location
-
-
-        return view('user.categories', compact('category', 'services'));
+    if ($request->filled('search')) {
+        $servicesQuery->whereHas('serviceProvider.user', function ($query) use ($request) {
+            $query->where('name', 'like', '%' . $request->search . '%')
+                ->orWhere('location', 'like', '%' . $request->search . '%');
+        });
     }
+
+    $services = $servicesQuery->paginate(6)->withQueryString();
+
+    
+    $appointments = Appointment::whereIn('service_id', $services->pluck('id'))
+        ->get(['service_id', 'date', 'time']);
+
+    $bookedSlots = [];
+
+    foreach ($appointments as $appointment) {
+        $bookedSlots[$appointment->service_id][$appointment->date][] = $appointment->time;
+    }
+
+    
+    return view('user.categories', compact('category', 'services', 'bookedSlots'));
+}
+
 
 
     public function showDetails($id)
