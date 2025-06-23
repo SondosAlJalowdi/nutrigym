@@ -132,13 +132,11 @@
                         const name = document.getElementById('card-name').value;
                         const expiry = document.getElementById('card-expiry').value;
                         const cvc = document.getElementById('card-cvc').value;
-
                         if (!number || !name || !expiry || !cvc) {
                             Swal.showValidationMessage('Please fill all card details');
                             return false;
                         }
                     }
-
                     return {
                         payment_method: method,
                         start_date: startDate
@@ -158,13 +156,11 @@
                     }).then((finalResult) => {
                         if (finalResult.isConfirmed) {
                             const form = document.getElementById(`enroll-form-${serviceId}`);
-
                             const startDateInput = document.createElement('input');
                             startDateInput.type = 'hidden';
                             startDateInput.name = 'start_date';
                             startDateInput.value = result.value.start_date;
                             form.appendChild(startDateInput);
-
                             form.submit();
                         }
                     });

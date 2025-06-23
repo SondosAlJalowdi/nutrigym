@@ -180,7 +180,11 @@
                 const timeSelect = document.getElementById('time-select-' + serviceId);
 
                 // Reset all options
-                [...timeSelect.options].forEach(opt => opt.disabled = false);
+                [...timeSelect.options].forEach(opt => {
+                    opt.disabled = false;
+                    opt.textContent = opt
+                    .value; // reset text if it was appended with "(booked)"
+                });
 
                 // Get today's date string and hour
                 const today = new Date().toISOString().split('T')[0];
@@ -211,8 +215,8 @@
             });
         });
 
-        // Auto-select today and trigger change when modal opens
-        document.querySelectorAll('[id^="bookModal"]').forEach(modal => {
+        // Auto-select today and trigger change when modal opens (Bootstrap 5 event)
+        document.querySelectorAll('.modal').forEach(modal => {
             modal.addEventListener('shown.bs.modal', function() {
                 const dateInput = modal.querySelector('.appointment-date');
                 if (dateInput) {
