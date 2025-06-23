@@ -2,7 +2,6 @@
 @section('content')
     <div class="container py-5">
         <h2 class="text-center mb-4 text-uppercase text-white" style="margin-top: 120px ">{{ $category->name }}</h2>
-
         <!-- Search Form -->
         <form method="GET" class="mb-4 p-3 rounded shadow-sm"
             style="border: 1px solid #f36100; background-color: rgba(0, 0, 0, 0.1);">
