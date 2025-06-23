@@ -3,12 +3,11 @@
 
 <head>
     <meta charset="UTF-8">
+    <link rel="shortcut icon" href="gym.png" type="">
     <meta name="description" content="Gym Template">
     <meta name="keywords" content="Gym, unica, creative, html">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="shortcut icon" href="gym.png" type="">
-
     <title>NutriGym</title>
 
     <!-- Google Font -->
@@ -17,18 +16,17 @@
 
     <!-- Css Styles -->
     <!-- CSS Styles -->
-<link rel="stylesheet" href="{{ asset('gymlife-master/css/bootstrap.min.css') }}">
-<link rel="stylesheet" href="{{ asset('gymlife-master/css/font-awesome.min.css') }}">
-<link rel="stylesheet" href="{{ asset('gymlife-master/css/flaticon.css') }}">
-<link rel="stylesheet" href="{{ asset('gymlife-master/css/owl.carousel.min.css') }}">
-<link rel="stylesheet" href="{{ asset('gymlife-master/css/barfiller.css') }}">
-<link rel="stylesheet" href="{{ asset('gymlife-master/css/magnific-popup.css') }}">
-<link rel="stylesheet" href="{{ asset('gymlife-master/css/slicknav.min.css') }}">
-<link rel="stylesheet" href="{{ asset('gymlife-master/css/style.css') }}">
-
+    <link rel="stylesheet" href="{{ asset('gymlife-master/css/bootstrap.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('gymlife-master/css/font-awesome.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('gymlife-master/css/flaticon.css') }}">
+    <link rel="stylesheet" href="{{ asset('gymlife-master/css/owl.carousel.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('gymlife-master/css/barfiller.css') }}">
+    <link rel="stylesheet" href="{{ asset('gymlife-master/css/magnific-popup.css') }}">
+    <link rel="stylesheet" href="{{ asset('gymlife-master/css/slicknav.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('gymlife-master/css/style.css') }}">
 </head>
 
-<body>
+<body style="background-color: #151515">
     <!-- Offcanvas Menu Section Begin -->
     <div class="offcanvas-menu-overlay"></div>
     <div class="offcanvas-menu-wrapper">
@@ -70,77 +68,54 @@
     <!-- Offcanvas Menu Section End -->
 
     <!-- Header Section Begin -->
-    <header class="header-section" style="background-color: black ">
+    <header class="header-section" style="background-color: black; padding-top: 5px; " >
         <div class="container-fluid">
             <div class="row">
                 <div class="col-lg-3">
                     <div class="logo">
-                        <a href="./index.html">
-                            <img src="{{ asset('gymlife-master/img/logo.png') }}" alt="Logo">
-                        </a>
+                        <h1 style="color: white">Nutri<span style="color:#f36100">Gym</span></h1>
                     </div>
                 </div>
-                <div class="col-lg-6">
+                <div class="col-lg-6 mt-5"  style="padding-top: 0px;">
                     <nav class="nav-menu">
                         <ul>
-                            <li class="{{ request()->routeIs('user.home') ? 'active' : '' }}"><a href="{{route ('user.home')}}">Home</a></li>
-                            <li><a href="./about-us.html">About Us</a></li>
-                            <li><a href="./class-details.html">Classes</a></li>
+                            <li class="{{ request()->routeIs('user.home') ? 'active' : '' }}"><a
+                                    href="{{ route('user.home') }}">Home</a></li>
                             @guest
-                            <li class="{{ request()->routeIs('registration') ? 'active' : '' }}"><a
-                                href="{{ route('registration') }}">Sign Up</a></li>
-                        <li class="{{ request()->routeIs('login') ? 'active' : '' }}"><a
-                                href="{{ route('login') }}">Login</a></li>
-                        @endguest
-                            <li><a href="#">Pages</a>
-                                <ul class="dropdown">
-                                    <li><a href="./about-us.html">About us</a></li>
-                                    <li><a href="./class-timetable.html">Classes timetable</a></li>
-                                    <li><a href="./bmi-calculator.html">Bmi calculate</a></li>
-                                    <li><a href="./team.html">Our team</a></li>
-                                    <li><a href="./gallery.html">Gallery</a></li>
-                                    <li><a href="./blog.html">Our blog</a></li>
-                                    <li><a href="./404.html">404</a></li>
-                                </ul>
-                            </li>
+                                <li class="{{ request()->routeIs('registration') ? 'active' : '' }}"><a
+                                        href="{{ route('registration') }}">Sign Up</a></li>
+                                <li class="{{ request()->routeIs('login') ? 'active' : '' }}"><a
+                                        href="{{ route('login') }}">Login</a></li>
+                            @endguest
                             @auth
-                            <li class="{{ request()->routeIs('user.profile') ? 'active' : '' }}">
-                                <a href="{{ route('user.profile') }}">
-                                    <i class="fa-solid fa-user mr-1"></i>
-                                    {{ explode(' ', auth()->user()->name)[0] }}
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="{{ route('logout') }}">
-                                    <i class="fa-solid fa-right-from-bracket mr-1"></i>Log Out
-                                </a>
-                            </li>
-                        @endauth
+                                <li class="{{ request()->routeIs('subscriptions.show') ? 'active' : '' }}"><a href="{{route('subscriptions.show')}}">My Subscriptions</a></li>
+                                <li class="{{ request()->routeIs('appointments.show') ? 'active' : '' }}"><a href="{{route('appointments.show')}}">My Appointments</a></li>
+                                <li class="nav-item {{ request()->routeIs('user.profile') ? 'active' : '' }}">
+                                    <a class="nav-link "
+                                        href="{{ route('user.profile') }}">
+                                        <i class="fa-solid fa-user mr-1"></i>
+                                        {{ explode(' ', auth()->user()->name)[0] }}
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{{ route('logout') }}">
+                                        <i class="fa-solid fa-right-from-bracket mr-1"></i>Log Out
+                                    </a>
+                                </li>
+                            @endauth
+
                         </ul>
                     </nav>
                 </div>
                 <div class="col-lg-3">
-                    <div class="top-option">
-                        <div class="to-search search-switch">
-                            <i class="fa fa-search"></i>
-                        </div>
-                        <div class="to-social">
-                            <a href="#"><i class="fa fa-facebook"></i></a>
-                            <a href="#"><i class="fa fa-twitter"></i></a>
-                            <a href="#"><i class="fa fa-youtube-play"></i></a>
-                            <a href="#"><i class="fa fa-instagram"></i></a>
-                        </div>
-                    </div>
+
                 </div>
-            </div>
-            <div class="canvas-open">
-                <i class="fa fa-bars"></i>
             </div>
         </div>
     </header>
     <!-- Header End -->
 
-    @yield("content")
+    @yield('content')
     <!-- Footer Section Begin -->
     <section class="footer-section">
         <div class="container">
@@ -148,7 +123,7 @@
                 <div class="col-lg-4">
                     <div class="fs-about">
                         <div class="fa-logo">
-                            <a href="#"><img src="img/logo.png" alt=""></a>
+
                         </div>
                         <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
                             labore dolore magna aliqua endisse ultrices gravida lorem.</p>
@@ -207,8 +182,14 @@
                 <div class="col-lg-12 text-center">
                     <div class="copyright-text">
                         <p><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-  Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="fa fa-heart" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
-  <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. --></p>
+                            Copyright &copy;
+                            <script>
+                                document.write(new Date().getFullYear());
+                            </script> All rights reserved | This template is made with <i
+                                class="fa fa-heart" aria-hidden="true"></i> by <a href="https://colorlib.com"
+                                target="_blank">Colorlib</a>
+                            <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+                        </p>
                     </div>
                 </div>
             </div>
@@ -228,16 +209,16 @@
     <!-- Search model end -->
 
     <!-- Js Plugins -->
-<!-- Js Plugins -->
-<script src="{{ asset('gymlife-master/js/jquery-3.3.1.min.js') }}"></script>
-<script src="{{ asset('gymlife-master/js/bootstrap.min.js') }}"></script>
-<script src="{{ asset('gymlife-master/js/jquery.magnific-popup.min.js') }}"></script>
-<script src="{{ asset('gymlife-master/js/masonry.pkgd.min.js') }}"></script>
-<script src="{{ asset('gymlife-master/js/jquery.barfiller.js') }}"></script>
-<script src="{{ asset('gymlife-master/js/jquery.slicknav.js') }}"></script>
-<script src="{{ asset('gymlife-master/js/owl.carousel.min.js') }}"></script>
-<script src="{{ asset('gymlife-master/js/main.js') }}"></script>
-<script src="https://kit.fontawesome.com/5ab58071a0.js" crossorigin="anonymous"></script>
+    <!-- Js Plugins -->
+    <script src="{{ asset('gymlife-master/js/jquery-3.3.1.min.js') }}"></script>
+    <script src="{{ asset('gymlife-master/js/bootstrap.min.js') }}"></script>
+    <script src="{{ asset('gymlife-master/js/jquery.magnific-popup.min.js') }}"></script>
+    <script src="{{ asset('gymlife-master/js/masonry.pkgd.min.js') }}"></script>
+    <script src="{{ asset('gymlife-master/js/jquery.barfiller.js') }}"></script>
+    <script src="{{ asset('gymlife-master/js/jquery.slicknav.js') }}"></script>
+    <script src="{{ asset('gymlife-master/js/owl.carousel.min.js') }}"></script>
+    <script src="{{ asset('gymlife-master/js/main.js') }}"></script>
+    <script src="https://kit.fontawesome.com/5ab58071a0.js" crossorigin="anonymous"></script>
 
 
 

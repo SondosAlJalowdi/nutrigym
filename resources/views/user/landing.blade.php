@@ -95,20 +95,9 @@
             <ul>
                 <li><a href="./index.html">Home</a></li>
                 <li><a href="./about-us.html">About Us</a></li>
-                <li><a href="./classes.html">Classes</a></li>
-                <li><a href="./services.html">Services</a></li>
+                <li class="{{ request()->routeIs('subscriptions.show') ? 'active' : '' }}"><a href="{{route('subscriptions.show')}}">My Subscriptions</a></li>
+                <li><a href="#">My Appointments</a></li>
                 <li><a href="./team.html">Our Team</a></li>
-                <li><a href="#">Pages</a>
-                    <ul class="dropdown">
-                        <li><a href="./about-us.html">About us</a></li>
-                        <li><a href="./class-timetable.html">Classes timetable</a></li>
-                        <li><a href="./bmi-calculator.html">Bmi calculate</a></li>
-                        <li><a href="./team.html">Our team</a></li>
-                        <li><a href="./gallery.html">Gallery</a></li>
-                        <li><a href="./blog.html">Our blog</a></li>
-                        <li><a href="./404.html">404</a></li>
-                    </ul>
-                </li>
                 <li><a href="./contact.html">Contact</a></li>
             </ul>
         </nav>
@@ -128,38 +117,25 @@
             <div class="row">
                 <div class="col-lg-3">
                     <div class="logo">
-                        <a href="./index.html">
-                            <img src="{{ asset('gymlife-master/img/logo.png') }}" alt="Logo">
-                        </a>
+                        <h1 style="color: white">Nutri<span style="color:#f36100">Gym</span></h1>
                     </div>
                 </div>
-                <div class="col-lg-6">
+                <div class="col-lg-6 mt-5">
                     <nav class="nav-menu">
                         <ul>
                             <li class="{{ request()->routeIs('user.home') ? 'active' : '' }}"><a
                                     href="{{ route('user.home') }}">Home</a></li>
-                            <li><a href="./about-us.html">About Us</a></li>
-                            <li><a href="./class-details.html">Classes</a></li>
                             @guest
                                 <li class="{{ request()->routeIs('registration') ? 'active' : '' }}"><a
                                         href="{{ route('registration') }}">Sign Up</a></li>
                                 <li class="{{ request()->routeIs('login') ? 'active' : '' }}"><a
                                         href="{{ route('login') }}">Login</a></li>
                             @endguest
-                            <li><a href="#">Pages</a>
-                                <ul class="dropdown">
-                                    <li><a href="./about-us.html">About us</a></li>
-                                    <li><a href="./class-timetable.html">Classes timetable</a></li>
-                                    <li><a href="./bmi-calculator.html">Bmi calculate</a></li>
-                                    <li><a href="./team.html">Our team</a></li>
-                                    <li><a href="./gallery.html">Gallery</a></li>
-                                    <li><a href="./blog.html">Our blog</a></li>
-                                    <li><a href="./404.html">404</a></li>
-                                </ul>
-                            </li>
                             @auth
-                                <li class="nav-item">
-                                    <a class="nav-link {{ request()->routeIs('user.profile') ? 'active-link' : '' }}"
+                            <li class="{{ request()->routeIs('subscriptions.show') ? 'active' : '' }}"><a href="{{route('subscriptions.show')}}">My Subscriptions</a></li>
+                            <li class="{{ request()->routeIs('appointments.show') ? 'active' : '' }}"><a href="{{route('appointments.show')}}">My Appointments</a></li>
+                                <li class="nav-item {{ request()->routeIs('user.profile') ? 'active' : '' }}">
+                                    <a class="nav-link "
                                         href="{{ route('user.profile') }}">
                                         <i class="fa-solid fa-user mr-1"></i>
                                         {{ explode(' ', auth()->user()->name)[0] }}
@@ -174,19 +150,7 @@
                         </ul>
                     </nav>
                 </div>
-                <div class="col-lg-3">
-                    <div class="top-option">
-                        <div class="to-search search-switch">
-                            <i class="fa fa-search"></i>
-                        </div>
-                        <div class="to-social">
-                            <a href="#"><i class="fa fa-facebook"></i></a>
-                            <a href="#"><i class="fa fa-twitter"></i></a>
-                            <a href="#"><i class="fa fa-youtube-play"></i></a>
-                            <a href="#"><i class="fa fa-instagram"></i></a>
-                        </div>
-                    </div>
-                </div>
+
             </div>
             <div class="canvas-open">
                 <i class="fa fa-bars"></i>
@@ -243,28 +207,32 @@
                     <div class="cs-item">
                         <span class="flaticon-034-stationary-bike"></span>
                         <h4>Top-Tier Facilities</h4>
-                        <p>Access modern gyms and equipment designed to enhance your workouts and maximize your progress.</p>
+                        <p>Access modern gyms and equipment designed to enhance your workouts and maximize your
+                            progress.</p>
                     </div>
                 </div>
                 <div class="col-lg-3 col-sm-6">
                     <div class="cs-item">
                         <span class="flaticon-033-juice"></span>
                         <h4>Personalized Nutrition</h4>
-                        <p>Connect with expert nutritionists who tailor meal plans to your lifestyle and health goals.</p>
+                        <p>Connect with expert nutritionists who tailor meal plans to your lifestyle and health goals.
+                        </p>
                     </div>
                 </div>
                 <div class="col-lg-3 col-sm-6">
                     <div class="cs-item">
                         <span class="flaticon-002-dumbell"></span>
                         <h4>Certified Professionals</h4>
-                        <p>Work with licensed trainers and therapists to safely improve your strength, flexibility, and recovery.</p>
+                        <p>Work with licensed trainers and therapists to safely improve your strength, flexibility, and
+                            recovery.</p>
                     </div>
                 </div>
                 <div class="col-lg-3 col-sm-6">
                     <div class="cs-item">
                         <span class="flaticon-014-heart-beat"></span>
                         <h4>Tailored Experience</h4>
-                        <p>From fitness to therapy to healthy food — everything is customized to support your personal journey.</p>
+                        <p>From fitness to therapy to healthy food — everything is customized to support your personal
+                            journey.</p>
                     </div>
                 </div>
             </div>
@@ -275,141 +243,102 @@
 
     <!-- Classes Section Begin -->
 
-<!-- Gyms (Image Left, Text Right) -->
-<section class="classes-section spad">
-    <div class="container section-box">
-        <div class="row align-items-center">
-            <div class="col-md-6 mb-4 mb-md-0">
-                <img src="{{ asset('gymlife-master/img/gallery/gyms.webp') }}" alt="Gyms" class="section-img">
-            </div>
-            <div class="col-md-6 text-md-start text-center">
-                <h2 class="section-title">Gyms</h2>
-                <p class="section-desc">
-                    Discover the best gyms near you and start your fitness journey today with expert coaches and modern equipment.
-                </p>
-                <a href="{{ route('categories', parameters: ['name' => 'gyms']) }}" class="primary-btn">See More</a>
-            </div>
-        </div>
-    </div>
-</section>
-
-<!-- Physical Therapy (Image Right, Text Left) -->
-<section class="classes-section spad">
-    <div class="container section-box">
-        <div class="row align-items-center flex-md-row-reverse">
-            <div class="col-md-6 mb-4 mb-md-0">
-                <img src="{{ asset('gymlife-master/img/gallery/Physical-Therapy.jpg') }}" alt="Physical Therapy" class="section-img">
-            </div>
-            <div class="col-md-6 text-md-start text-center">
-                <h2 class="section-title">Physical Therapy Clinics</h2>
-                <p class="section-desc">
-                    Rehabilitate your body with our trusted therapists using proven treatment techniques in a calm environment.
-                </p>
-                <a href="{{ route('categories', parameters: ['name' => 'Therapy']) }}" class="primary-btn">See More</a>
-            </div>
-        </div>
-    </div>
-</section>
-
-<!-- Nutrition (Center Layout) -->
-<section class="classes-section spad">
-    <div class="container section-box text-center">
-        <img src="{{ asset('gymlife-master/img/gallery/nutrition.jpg') }}" alt="Nutrition" class="section-img mb-4" style="max-width: ">
-        <h2 class="section-title">Nutrition Clinics</h2>
-        <p class="section-desc">
-            Personalized diet plans, healthy lifestyle guidance, and expert nutrition advice to support your fitness goals.
-        </p>
-        <a href="{{ route('categories', parameters: ['name' => 'Nutrition']) }}" class="primary-btn">See More</a>
-    </div>
-</section>
-
-<!-- Restaurants (Image Left, Text Right) -->
-<section class="classes-section spad">
-    <div class="container section-box">
-        <div class="row align-items-center">
-            <div class="col-md-6 mb-4 mb-md-0">
-                <img src="{{ asset('gymlife-master/img/gallery/resturant.webp') }}" alt="Restaurants" class="section-img">
-            </div>
-            <div class="col-md-6 text-md-start text-center">
-                <h2 class="section-title">Restaurants</h2>
-                <p class="section-desc">
-                    Explore healthy and delicious meal options in restaurants that understand fitness-focused diets.
-                </p>
-                <a href="{{ route('categories', parameters: ['name' => 'Restaurants']) }}" class="primary-btn">See More</a>
-            </div>
-        </div>
-    </div>
-</section>
-
-<!-- Store (Image Right, Text Left) -->
-<section class="classes-section spad">
-    <div class="container section-box">
-        <div class="row align-items-center flex-md-row-reverse">
-            <div class="col-md-6 mb-4 mb-md-0">
-                <img src="{{ asset('gymlife-master/img/gallery/store.webp') }}" alt="Store" class="section-img">
-            </div>
-            <div class="col-md-6 text-md-start text-center">
-                <h2 class="section-title">Store</h2>
-                <p class="section-desc">
-                    Shop your favorite fitness gear, health supplements, and wellness products in our exclusive store.
-                </p>
-                <a href="{{ route('categories', parameters: ['name' => 'Store']) }}" class="primary-btn">See More</a>
-            </div>
-        </div>
-    </div>
-</section>
-    <!-- ChoseUs Section End -->
-
-    <!-- Banner Section Begin -->
-    <section class="banner-section set-bg" data-setbg="{{ asset('gymlife-master/img/banner-bg.jpg') }} ">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12 text-center">
-                    <div class="bs-text">
-                        <h2>registration now to get more deals</h2>
-                        <div class="bt-tips">Where health, beauty and fitness meet.</div>
-                        <a href="#" class="primary-btn  btn-normal">Appointment</a>
-                    </div>
+    <!-- Gyms (Image Left, Text Right) -->
+    <section class="classes-section spad">
+        <div class="container section-box">
+            <div class="row align-items-center">
+                <div class="col-md-6 mb-4 mb-md-0">
+                    <img src="{{ asset('gymlife-master/img/gallery/gyms.webp') }}" alt="Gyms"
+                        class="section-img">
+                </div>
+                <div class="col-md-6 text-md-start text-center">
+                    <h2 class="section-title">Gyms</h2>
+                    <p class="section-desc">
+                        Discover the best gyms near you and start your fitness journey today with expert coaches and
+                        modern equipment.
+                    </p>
+                    <a href="{{ route('gyms.index') }}" class="primary-btn">See
+                        More</a>
                 </div>
             </div>
         </div>
     </section>
-    <!-- Banner Section End -->
 
-
-    <!-- Gallery Section Begin -->
-    <div class="gallery-section">
-        <div class="gallery">
-            <div class="grid-sizer"></div>
-            <div class="gs-item grid-wide set-bg"
-                data-setbg="{{ asset('gymlife-master/img/gallery/gallery-1.jpg') }} ">
-                <a href="img/gallery/gallery-1.jpg" class="thumb-icon image-popup"><i
-                        class="fa fa-picture-o"></i></a>
-            </div>
-            <div class="gs-item set-bg" data-setbg="{{ asset('gymlife-master/img/gallery/gallery-2.jpg') }}">
-                <a href="img/gallery/gallery-2.jpg" class="thumb-icon image-popup"><i
-                        class="fa fa-picture-o"></i></a>
-            </div>
-            <div class="gs-item set-bg" data-setbg="{{ asset('gymlife-master/img/gallery/gallery-3.jpg') }}">
-                <a href="img/gallery/gallery-3.jpg" class="thumb-icon image-popup"><i
-                        class="fa fa-picture-o"></i></a>
-            </div>
-            <div class="gs-item set-bg" data-setbg="{{ asset('gymlife-master/img/gallery/gallery-4.jpg') }}">
-                <a href="img/gallery/gallery-4.jpg" class="thumb-icon image-popup"><i
-                        class="fa fa-picture-o"></i></a>
-            </div>
-            <div class="gs-item set-bg" data-setbg="{{ asset('gymlife-master/img/gallery/gallery-5.jpg') }}">
-                <a href="img/gallery/gallery-5.jpg" class="thumb-icon image-popup"><i
-                        class="fa fa-picture-o"></i></a>
-            </div>
-            <div class="gs-item grid-wide set-bg"
-                data-setbg="{{ asset('gymlife-master/img/gallery/gallery-6.jpg') }}">
-                <a href="img/gallery/gallery-6.jpg" class="thumb-icon image-popup"><i
-                        class="fa fa-picture-o"></i></a>
+    <!-- Physical Therapy (Image Right, Text Left) -->
+    <section class="classes-section spad">
+        <div class="container section-box">
+            <div class="row align-items-center flex-md-row-reverse">
+                <div class="col-md-6 mb-4 mb-md-0">
+                    <img src="{{ asset('gymlife-master/img/gallery/Physical-Therapy.jpg') }}" alt="Physical Therapy"
+                        class="section-img">
+                </div>
+                <div class="col-md-6 text-md-start text-center">
+                    <h2 class="section-title">Physical Therapy Clinics</h2>
+                    <p class="section-desc">
+                        Rehabilitate your body with our trusted therapists using proven treatment techniques in a calm
+                        environment.
+                    </p>
+                    <a href="{{ url('/categories/' . str_replace(' ', '-', "Physical Therapy Clinics"))  }}" class="primary-btn">See
+                        More</a>
+                </div>
             </div>
         </div>
-    </div>
-    <!-- Gallery Section End -->
+    </section>
+
+    <!-- Nutrition (Center Layout) -->
+    <section class="classes-section spad">
+        <div class="container section-box text-center">
+            <img src="{{ asset('gymlife-master/img/gallery/nutrition.jpg') }}" alt="Nutrition"
+                class="section-img mb-4" style="max-width: ">
+            <h2 class="section-title">Nutrition Clinics</h2>
+            <p class="section-desc">
+                Personalized diet plans, healthy lifestyle guidance, and expert nutrition advice to support your fitness
+                goals.
+            </p>
+            <a href="{{ url('/categories/' . str_replace(' ', '-', "Nutrition Clinics"))  }}" class="primary-btn">See More</a>
+        </div>
+    </section>
+
+    <!-- Restaurants (Image Left, Text Right) -->
+    <section class="classes-section spad">
+        <div class="container section-box">
+            <div class="row align-items-center">
+                <div class="col-md-6 mb-4 mb-md-0">
+                    <img src="{{ asset('gymlife-master/img/gallery/resturant.webp') }}" alt="Restaurants"
+                        class="section-img">
+                </div>
+                <div class="col-md-6 text-md-start text-center">
+                    <h2 class="section-title">Restaurants</h2>
+                    <p class="section-desc">
+                        Explore healthy and delicious meal options in restaurants that understand fitness-focused diets.
+                    </p>
+                    <a href="{{ route('categories', parameters: ['name' => 'Restaurants']) }}"
+                        class="primary-btn">See More</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Store (Image Right, Text Left) -->
+    <section class="classes-section spad">
+        <div class="container section-box">
+            <div class="row align-items-center flex-md-row-reverse">
+                <div class="col-md-6 mb-4 mb-md-0">
+                    <img src="{{ asset('gymlife-master/img/gallery/store.jpg') }}" alt="Store"
+                        class="section-img">
+                </div>
+                <div class="col-md-6 text-md-start text-center">
+                    <h2 class="section-title">Store</h2>
+                    <p class="section-desc">
+                        Shop your favorite fitness gear, health supplements, and wellness products in our exclusive
+                        store.
+                    </p>
+                    <a href="{{ route('categories', parameters: ['name' => 'Store']) }}" class="primary-btn">See
+                        More</a>
+                </div>
+            </div>
+        </div>
+    </section>
 
 
     <!-- Get In Touch Section Begin -->

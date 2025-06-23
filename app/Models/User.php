@@ -10,13 +10,14 @@ use Illuminate\Notifications\Notifiable;
 use Filament\Models\Contracts\FilamentUser;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+/**
+ * @property \Illuminate\Database\Eloquent\Collection|\App\Models\Subscription[] $subscriptions
+ */
 
 class User extends Authenticatable implements FilamentUser
 {
     use HasApiTokens, HasFactory, Notifiable;
 
-
-    
     public function canAccessPanel(Panel $panel): bool
     {
         return str_ends_with($this->role, 'admin');
@@ -33,15 +34,11 @@ class User extends Authenticatable implements FilamentUser
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
-    public function roles()
+    public function hasRole(string $role): bool
     {
-        return $this->belongsToMany(Role::class);
+        return $this->role === $role;
     }
 
-    public function hasRole($roleName)
-    {
-        return $this->roles->pluck('name')->contains($roleName);
-    }
 
     public function serviceProvider()
     {

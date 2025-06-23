@@ -34,7 +34,6 @@ class ServiceProviderResource extends Resource
                         return User::where('role', 'service provider')
                             ->pluck('name', 'id');
                     })
-                    
                     ->required(),
                     TextInput::make('type')->required(),
                     TextInput::make('about')->required(),
@@ -59,7 +58,7 @@ class ServiceProviderResource extends Resource
             ->actions([
                 Tables\Actions\EditAction::make(),
                 Tables\Actions\ViewAction::make(),
-                
+
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([

@@ -25,22 +25,36 @@ class UserPagesController extends Controller
     }
 
     public function completeProfile(Request $request)
-
     {
-
         $request->validate([
+            'name' => 'required|string|min:3',
             'phone' => ['nullable', 'regex:/^07[7-9][0-9]{7}$/'],
             'age' => 'nullable|integer|min:0',
             'gender' => 'nullable|in:male,female',
             'height' => 'nullable|numeric',
             'weight' => 'nullable|numeric',
-            'location' => 'nullable|string',
+            'location' => 'nullable|string|max:255',
+            'image' => 'nullable|image|mimes:jpg,jpeg,png|max:2048',
         ]);
 
-           /** @var \App\Models\User $user */
         $user = Auth::user();
-        $user->update($request->only('phone', 'age', 'gender', 'height', 'weight', 'location'));
+
+        $user->name = $request->name;
+        $user->phone = $request->phone;
+        $user->age = $request->age;
+        $user->gender = $request->gender;
+        $user->height = $request->height;
+        $user->weight = $request->weight;
+        $user->location = $request->location;
+
+        if ($request->hasFile('image')) {
+            $imagePath = $request->file('image')->store('profiles', 'public');
+            $user->image = $imagePath;
+        }
+
+        $user->save();
 
         return redirect()->route('user.profile')->with('success', 'Profile updated successfully!');
     }
+
 }

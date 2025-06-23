@@ -15,6 +15,9 @@ class AuthManager extends Controller
 {
     function login()
     {
+        if (!session()->has('url.intended') && url()->previous() !== url()->current()) {
+            session(['url.intended' => url()->previous()]);
+        }
         return view('login');
     }
 
@@ -39,7 +42,7 @@ class AuthManager extends Controller
             } else if ($user->role === 'user') {
                 return redirect()->intended();
             } else {
-                return redirect()->route('user.home');
+                return redirect(route('login'))->with('error', 'Unauthorized access');
             }
         }
         return redirect(route('login'))->with('error', 'Invalid login details');
@@ -57,10 +60,10 @@ class AuthManager extends Controller
             'name' => $request->name,
             'email' => $request->email,
             'password' => Hash::make($request->password),
+            'role' => 'user',
         ]);
 
         // Assign default role (user)
-        $user->roles()->attach(Role::where('name', 'user')->first()->id);
 
         Auth::login($user);
 

@@ -1,7 +1,7 @@
 @extends('user.generalLayout')
 @section('content')
     <div class="container d-flex justify-content-center align-items-center min-vh-100 p-4">
-        <div class="card shadow-lg p-4 w-100" style="max-width: 500px; margin-top: 90px ;">
+        <div class="card shadow-lg p-4 w-100" style="max-width: 500px; margin-top: 150px ;">
             <h3 class="text-center mb-3">Register</h3>
             <form id="registrationForm" method="POST" action="{{ route('registration.post') }}">
                 @csrf

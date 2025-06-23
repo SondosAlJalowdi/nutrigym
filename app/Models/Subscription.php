@@ -20,6 +20,11 @@ class Subscription extends Model
         'end_date',
         'details',
     ];
+
+    protected $casts = [
+        'start_date' => 'datetime',
+        'end_date' => 'datetime',
+    ];
     public function user() {
         return $this->belongsTo(User::class);
     }
@@ -27,4 +32,10 @@ class Subscription extends Model
     public function serviceProvider() {
         return $this->belongsTo(ServiceProvider::class, 'service_id');
     }
+
+    public function service()
+{
+    return $this->belongsTo(Service::class);
+}
+
 }

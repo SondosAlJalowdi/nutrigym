@@ -21,9 +21,10 @@ class ServiceProvider extends Model
         return $this->belongsTo(Category::class);
     }
 
-    public function services() {
-        return $this->hasMany(Service::class);
-    }
+    public function services()
+{
+    return $this->hasMany(Service::class, 'provider_id');
+}
 
     public function products() {
         return $this->hasMany(Product::class);
@@ -37,8 +38,9 @@ class ServiceProvider extends Model
         return $this->hasMany(Appointment::class);
     }
 
-    public function reviews() {
-        return $this->hasMany(Review::class);
+    public function reviews()
+    {
+        return $this->hasMany(Review::class, 'provider_id'); // not service_provider_id
     }
 
 }

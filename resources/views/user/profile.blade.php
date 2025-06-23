@@ -2,7 +2,7 @@
 
 @section('content')
     <div class="container d-flex justify-content-center align-items-center min-vh-100 p-4">
-        <div class="card shadow-lg p-4 w-100" style="max-width: 600px; margin-top: 90px;">
+        <div class="card shadow-lg p-4 w-100" style="max-width: 600px; margin-top: 120px;">
             <h2 class="text-center mb-4">My Profile</h2>
 
             <div class="row align-items-center">
@@ -11,7 +11,7 @@
                         <img src="{{ asset('storage/' . Auth::user()->image) }}" class="img-fluid rounded-circle border"
                             style="width: 140px; height: 140px; object-fit: cover;" alt="Profile Image">
                     @else
-                        <img src="{{ asset('default-profile.png') }}" class="img-fluid rounded-circle border"
+                        <img src="{{ asset('default-user-img.webp') }}" class="img-fluid rounded-circle border"
                             style="width: 140px; height: 140px; object-fit: cover;" alt="Default Profile Image">
                     @endif
                 </div>
